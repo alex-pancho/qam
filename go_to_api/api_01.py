@@ -1,15 +1,18 @@
 import requests
 server = "https://qauto.forstudy.space/api"
-endpoint = "/auth/signin"
+signin = "/auth/signin"
+users_cur = "/users/current"
 # сервер та ендпоінт задають урл який ми тестимо
 # далі данні що ми шлемо методом пост
 example_value = {
-  "email": "test@test.com",
-  "password": "Qwerty12345",
+  "email": "qam2608@2022test.com",
+  "password": "Qam2608venv",
   "remember": False
 }
+
+s = requests.session()
 # викликаємо метод пост і json= вказує що ми шлем як ДЖСОН
-r = requests.post(server+endpoint, json=example_value)
+r = s.post(server+signin, json=example_value)
 # сервер присилає нм теж ДЖСОН що ми перетворюємол в словник і записуєм у зм. 
 server_says = r.json()
 # використовуємо методи словника
@@ -21,3 +24,7 @@ if "status" in server_says:
     #  інакше
     else:
         print(server_says['message'])
+print("="*88)
+r2 = s.get(server+users_cur)
+print(r2.status_code)
+print(r2.json())
