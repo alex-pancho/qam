@@ -1,27 +1,36 @@
-import hillel_api
+from hillel_api import *
 import pytest
 
-def test_01_sigin_positive():
-    s = hillel_api.s
+
+def test_sigin_positive():
+
     user_data = {
     "email": "qam2608@2022test.com",
     "password": "Qam2608venv",
     "remember": False
     }
-    r = hillel_api.auth_signin(s, user_data)
-    r_json = hillel_api.after_processsing(r)    
+    r = auth.signin(s, user_data)
+    r_json = after_processsing(r)    
     assert r.status_code == 200, "Wrong status code"
     assert r_json["status"] == "ok", "Key 'status' is not ok"
 
-def test_02_sigin_negative():
-    s = hillel_api.s
-    user_data = {
+
+def test_sigin_negative():
+
+    user_data_negative = {
     "email": "qam@2022test.com",
     "password": "Qam2",
     "remember": False
     }
-    r = hillel_api.auth_signin(s, user_data)
-    r_json = hillel_api.after_processsing(r)
+    r = auth.signin(s, user_data_negative)
+    r_json = after_processsing(r)
     assert r.status_code == 400, "Wrong status code"
     assert r_json["status"] == "error", "Key 'status' is not error"
 
+
+def test_logout():
+
+    r = auth.logout(s)
+    r_json = after_processsing(r)    
+    assert r.status_code == 200, "Wrong status code"
+    assert r_json["status"] == "ok", "Key 'status' is not ok"
