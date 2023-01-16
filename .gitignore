@@ -1,5 +1,6 @@
 venv
 .pytest_cache
-_pycache_
+__pycache__
+__pycache__/*
 chromedriver.exe
 geckodriver.log
