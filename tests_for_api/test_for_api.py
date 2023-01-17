@@ -34,3 +34,22 @@ def test_logout():
     r_json = after_processsing(r)    
     assert r.status_code == 200, "Wrong status code"
     assert r_json["status"] == "ok", "Key 'status' is not ok"
+
+def test_reset_password():
+    user_data = {
+    "email": "qam2608@2022test.com"
+    }
+    r = auth.resetpassword(s, user_data)
+    r_json = after_processsing(r) 
+    assert r.status_code == 200, "Wrong status code"
+    assert r_json["status"] == "ok", "Key 'status' is not ok"
+
+def test_user_reset_password():
+    user_data = {
+    "user_id": 12345,
+    "token" : "fhjd747829"
+    }
+    r = users.resetpassword(s, user_data)
+    r_json = after_processsing(r) 
+    assert r.status_code == 200, "Wrong status code"
+    assert r_json["status"] == "ok", "Key 'status' is not ok"
